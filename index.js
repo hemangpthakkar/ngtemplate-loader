@@ -43,9 +43,6 @@ module.exports = function (content) {
     
     var templatesString = "/templates";
     var templatesIdx = filePath.indexOf(templatesString);
-    if (templatesIdx > -1) {        
-        filePath = filePath.replace(templatesString, '');
-    }
     if (extractModule) {
         if (templatesIdx === -1) {
            throw 'The path for file doesn\'t contain templates'; 
@@ -54,6 +51,9 @@ module.exports = function (content) {
             ngModule = ngModule.replace('/', '');
         }
     }
+    if (templatesIdx > -1) {        
+        filePath = filePath.replace(templatesString, '');
+    }    
     var tplString = ".tpl";
     if (filePath.includes(tplString)) {        
         filePath = filePath.replace(tplString, '');
