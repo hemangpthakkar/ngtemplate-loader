@@ -9,6 +9,7 @@ module.exports = function (content) {
     var ngModule = query.module || 'ng'; // ng is the global angular module that does not need to explicitly required
     var relativeTo = query.relativeTo || '';
     var prefix = query.prefix || '';
+    var extractModule = !!query.extractModule || false; // will try to extract module name from file path
     var requireAngular = !!query.requireAngular || false;
     var absolute = false;
     var pathSep = query.pathSep || '/';
@@ -39,6 +40,25 @@ module.exports = function (content) {
     }
 
     var filePath = prefix + resource.slice(relativeToIndex + relativeTo.length); // get the base path
+    
+    var templatesString = "/templates";
+    var templatesIdx = filePath.indexOf(templatesString);
+    if (templatesIdx > -1) {        
+        filePath = filePath.replace(templatesString, '');
+    }
+    if (extractModule) {
+        if (templatesIdx === -1) {
+           throw 'The path for file doesn\'t contain templates'; 
+        }else {
+            ngModule = filePath.slice(0,templatesIdx-1);
+            ngModule = ngModule.replace('/', '');
+        }
+    }
+    var tplString = ".tpl";
+    if (filePath.includes(tplString)) {        
+        filePath = filePath.replace(tplString, '');
+    }
+    
     var html;
 
     if (content.match(/^module\.exports/)) {
