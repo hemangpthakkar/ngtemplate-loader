@@ -1,6 +1,6 @@
 # AngularJS Template loader for [webpack](http://webpack.github.io/)
 
-## This loader is specifically for those projects which use [AngularJS Template Asset-Pipeline Plugin] and want to use Webpack to bundle their UI files.
+## This loader is specifically for those projects which use [AngularJS Template Asset-Pipeline Plugin](https://grails.org/plugin/angular-template-asset-pipeline) and want to use Webpack to bundle their UI files.
 
 Includes your AngularJS templates into your webpack Javascript Bundle. Pre-loads the AngularJS template cache
 to remove initial load times of templates.
