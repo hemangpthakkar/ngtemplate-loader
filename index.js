@@ -41,6 +41,7 @@ module.exports = function (content) {
 
     var filePath = prefix + resource.slice(relativeToIndex + relativeTo.length); // get the base path
     
+    //------------Added code for handling grails ng template plugin semantics-----------------
     var templatesString = "/templates";
     var templatesIdx = filePath.indexOf(templatesString);
     if (extractModule) {
@@ -58,6 +59,7 @@ module.exports = function (content) {
     if (filePath.includes(tplString)) {        
         filePath = filePath.replace(tplString, '');
     }
+    //--------------- End of modification --------------------------------
     
     var html;
 
